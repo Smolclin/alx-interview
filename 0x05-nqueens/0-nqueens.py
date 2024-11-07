@@ -6,10 +6,10 @@ Chess grandmaster Judit Polgár, the strongest female chess player of all time
 import sys
 
 
-def backtrack(r, n, cols, pos, neg, board):
+def backtrack(a, i, cols, pos, neg, board):
     """
     """
-    if r == n:
+    if a == i:
         res = []
         for l in range(len(board)):
             for k in range(len(board[l])):
@@ -17,21 +17,21 @@ def backtrack(r, n, cols, pos, neg, board):
                     res.append([l, k])
         print(res)
         return
-    for c in range(n):
-        if c in cols or (r + c) in pos or (r - c) in neg:
+    for c in range(i):
+        if c in cols or (a + c) in pos or (a - c) in neg:
             continue
 
         cols.add(c)
-        pos.add(r + c)
-        neg.add(r - c)
-        board[r][c] = 1
+        pos.add(a + c)
+        neg.add(a - c)
+        board[a][c] = 1
 
-        backtrack(r+1, n, cols, pos, neg, board)
+        backtrack(a+1, i, cols, pos, neg, board)
 
         cols.remove(c)
-        pos.remove(r + c)
-        neg.remove(r - c)
-        board[r][c] = 0
+        pos.remove(a + c)
+        neg.remove(a - c)
+        board[a][c] = 0
 
 
 def nqueens(n):
